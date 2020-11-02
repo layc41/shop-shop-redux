@@ -3,15 +3,29 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
+//importing for redux
+import { Provider as ReduxProvider } from "react-redux";
+import configureStore from "./utils/store";
+
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Nav from "./components/Nav";
-import { StoreProvider } from "./utils/GlobalState";
+
+//Removing global state
+// import { StoreProvider } from "./utils/GlobalState";
 import Success from "./pages/Success";
 import OrderHistory from "./pages/OrderHistory";
+
+const reduxStore = configureStore({
+  products: [],
+  cart: [],
+  cartOpen: false,
+  categories: [],
+  currentCategory: '',
+});
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -27,10 +41,11 @@ const client = new ApolloClient({
 
 function App() {
   return (
+
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <StoreProvider>
+          <ReduxProvider store={reduxStore}>
             <Nav />
             <Switch>
               <Route exact path="/" component={Home} />
@@ -41,11 +56,10 @@ function App() {
               <Route exact path="/products/:id" component={Detail} />
               <Route component={NoMatch} />
             </Switch>
-          </StoreProvider>
+          </ReduxProvider>
         </div>
       </Router>
     </ApolloProvider>
-
   );
 }
 
