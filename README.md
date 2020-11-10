@@ -4,7 +4,7 @@
 Redux is the industry standard for managing complex state in a large-scale React application. This is a refactored e-commerce platform that was created by replacing the way it handles complex state management using the Context API with Redux, the open-source JavaScript library that it’s emulating.
 
 ## Screenshot
-![Shop-Shop](/public/assets/img/portfolio-screenshot.png)
+![Shop-Shop](/client/public/assets/img/shop-redux.png)
 
 ## Technologies
 * JS
